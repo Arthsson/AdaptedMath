@@ -13,7 +13,9 @@ class MenuScreen extends StatelessWidget {
     final appSettings = Provider.of<AppSettings>(context);
 
     final levels = [
-      Level(number: 1, isUnlocked: true, levelClear: false),
+      Level(number: 1, isUnlocked: true, levelClear: true),
+      Level(number: 2, isUnlocked: true, levelClear: false),
+      Level(number: 3, isUnlocked: false, levelClear: false),
     ];
 
     return Scaffold(
@@ -47,14 +49,16 @@ class MenuScreen extends StatelessWidget {
                       'Bloqueado',
                       style: TextStyle(fontSize: appSettings.fontSize),
                     ),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuizScreen(),
-                  ),
-                );
-              },
+              onTap: level.isUnlocked
+                  ? () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QuizScreen(),
+                        ),
+                      );
+                    }
+                  : () {},
             ),
           );
         },
@@ -95,7 +99,6 @@ class MenuScreen extends StatelessWidget {
               label: 'Perfil'),
         ],
         onTap: (index) {
-          // Lógica para navegar para outras telas ao clicar nos ícones do BottomNavigationBar
         },
       ),
     );

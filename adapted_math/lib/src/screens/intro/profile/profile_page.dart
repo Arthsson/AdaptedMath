@@ -53,7 +53,6 @@ class ProfilePage extends StatelessWidget {
               label: 'Perfil'),
         ],
         onTap: (index) {
-          // Lógica para navegar para outras telas ao clicar nos ícones do BottomNavigationBar
         },
       ),
     );
