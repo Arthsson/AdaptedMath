@@ -1,4 +1,4 @@
-import 'package:adapted_math/src/screens/menu/menu_page.dart';
+import 'package:adapted_math/src/screens/intro/game/menu.dart';
 import 'package:adapted_math/src/screens/intro/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -141,45 +141,46 @@ class _ScoreScreenState extends State<ScoreScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.gamepad_outlined),
-              onPressed: () {
-                Navigator.push(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1,
+        items:  [
+          BottomNavigationBarItem(
+            icon: IconButton(icon: const Icon(Icons.menu),
+            onPressed: (){
+               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const GameSelectionScreen(),
+                    builder: (context) => const MenuScreen(),
                   ),
                 );
-              },
+            }),
+            label: 'Menu',
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(icon: const Icon(Icons.assignment),
+            onPressed: (){
+          
+            }
             ),
-            IconButton(
-              icon: const Icon(Icons.leaderboard),
-              onPressed: () {
-                Navigator.push(
+            label: 'Missões'
+          ),
+          BottomNavigationBarItem(
+           icon: IconButton(icon: const Icon(Icons.person),
+            onPressed: (){
+              Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ScoreScreen(),
+                    builder: (context) => const ProfilePage(),
                   ),
                 );
-              },
+            }
             ),
-            IconButton(
-              icon: const Icon(Icons.person),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+            label: 'Perfil'
+          ),
+        ],
+        onTap: (index) {
+          // Lógica para navegar para outras telas ao clicar nos ícones do BottomNavigationBar
+        },
       ),
     );
   }

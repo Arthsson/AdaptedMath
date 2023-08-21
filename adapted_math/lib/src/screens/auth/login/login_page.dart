@@ -1,201 +1,102 @@
-// ignore_for_file: unused_field
-
-import 'package:adapted_math/src/screens/auth/forgout_pass/forgout_pass_page.dart';
-import 'package:adapted_math/src/screens/menu/menu_page.dart';
-import 'package:adapted_math/src/screens/auth/sign/sign_page.dart';
+import 'package:adapted_math/src/screens/auth/config/config_page.dart';
+import 'package:adapted_math/src/screens/intro/game/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../shared/utils/app_confing.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  double _textSize = 20.0;
-  final _formKey = GlobalKey<FormState>();
-  String _email = '';
-  String _password = '';
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
+    final appSettings = Provider.of<AppSettings>(context);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: const Text(
-          'Matemática Inclusiva',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Text(
+          'Login',
+          style: TextStyle(fontSize: appSettings.fontSize),
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.settings,
-              size: 28,
-            ),
+            icon: const Icon(Icons.settings),
             onPressed: () {
-              // Navegar para a tela de configurações (substitua pela tela desejada)
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ConfiguracoesScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const ConfigScreen()),
               );
             },
           ),
         ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.blueGrey,
-              Colors.blue,
-              Colors.greenAccent,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Login',
+                  labelStyle: TextStyle(fontSize: appSettings.fontSize),
+                ),
+                style: TextStyle(fontSize: appSettings.fontSize),
+              ),
+              const SizedBox(height: 16.0),
+              TextField(
+                obscureText: isObscure,
+                decoration: InputDecoration(
+                  labelText: 'Senha',
+                  labelStyle: TextStyle(fontSize: appSettings.fontSize),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
+                    },
+                  ),
+                ),
+                style: TextStyle(fontSize: appSettings.fontSize),
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MenuScreen()),
+                  );
+                },
+                child: Text(
+                  'Logar',
+                  style: TextStyle(fontSize: appSettings.fontSize),
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MenuScreen()),
+                  );
+                },
+                child: Image.asset(
+                  'assets/google.png',
+                  height: 40,
+                ),
+              )
             ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('LOGIN', style:
-              TextStyle(
-                fontSize: _textSize,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: TextFormField(
-                      style:TextStyle(fontSize: _textSize),
-                      decoration: const InputDecoration(
-                        hintText: 'Email'
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira um e-mail válido.';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _email = value ?? '';
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: TextFormField(
-                      style: TextStyle(fontSize: _textSize),
-                      decoration: const InputDecoration(
-                        hintText: 'Senha',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira uma senha válida.';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _password = value ?? '';
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                 Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const GameSelectionScreen(),
-                ),
-              );
-              },
-              child: Text('Logar', style: TextStyle(fontSize: _textSize),),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-
-              onPressed: () {
-                // Implementar a lógica de login com o Google
-              },
-              child: Text('Login com Google', style: TextStyle(fontSize: _textSize),),
-            ),
-            const SizedBox(height: 10),
-            TextButton(
-              onPressed: () {
-              // Navegar para a tela de configurações (substitua pela tela desejada)
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUpScreen(),
-                ),
-              );
-            },
-              child: Text('Cadastre-se',style: TextStyle(fontSize: _textSize, color: Colors.white),),
-            ),
-            TextButton(
-              onPressed: () {
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ForgoutPassScreen(),
-                ),
-              );
-              },
-              child: Text('Esqueceu a senha?',style:TextStyle(fontSize: _textSize, color: Colors.white),),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.format_size,
-                  color: Colors.white,
-                ),
-                Slider(
-                  value: _textSize,
-                  min: 10.0,
-                  max: 30.0,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _textSize = newValue;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ConfiguracoesScreen extends StatelessWidget {
-  const ConfiguracoesScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Configurações'),
-      ),
-      body: const Center(
-        child: Text('Esta é a tela de configurações'),
       ),
     );
   }

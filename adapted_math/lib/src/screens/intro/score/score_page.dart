@@ -1,11 +1,11 @@
 import 'package:adapted_math/src/screens/intro/game/menu.dart';
-import 'package:adapted_math/src/screens/intro/score/score_page.dart';
+import 'package:adapted_math/src/screens/intro/profile/profile_page.dart';
 import 'package:adapted_math/src/shared/utils/app_confing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ScorePage extends StatelessWidget {
+  const ScorePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,12 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil'),
+        title: const Text('Missoes'),
         automaticallyImplyLeading: false,
       ),
       body: Container(),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
+        currentIndex: 1,
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
@@ -37,19 +37,19 @@ class ProfilePage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
               icon: IconButton(
-                  icon: const Icon(Icons.assignment),
+                  icon: const Icon(Icons.assignment), onPressed: () {}),
+              label: 'Missões'),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                  icon: const Icon(Icons.person),
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ScorePage(),
+                        builder: (context) => const ProfilePage(),
                       ),
                     );
                   }),
-              label: 'Missões'),
-          BottomNavigationBarItem(
-              icon:
-                  IconButton(icon: const Icon(Icons.person), onPressed: () {}),
               label: 'Perfil'),
         ],
         onTap: (index) {
@@ -59,4 +59,3 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-

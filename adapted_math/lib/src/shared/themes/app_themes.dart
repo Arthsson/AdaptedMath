@@ -4,8 +4,8 @@ class AppThemes {
   static final ThemeData defaultTheme = ThemeData(
     primaryColor: Colors.blueGrey,
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.greenAccent),
-    textTheme: const TextTheme(
-      bodyMedium: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+    textTheme:  const TextTheme(
+      bodyMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
       displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
       bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
     ),

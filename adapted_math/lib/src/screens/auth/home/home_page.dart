@@ -1,43 +1,70 @@
-import 'package:adapted_math/src/screens/auth/base_auth_page.dart';
+import 'package:adapted_math/src/screens/auth/config/config_page.dart';
+import 'package:adapted_math/src/screens/auth/login/login_page.dart';
+import 'package:adapted_math/src/shared/utils/app_confing.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage2 extends StatelessWidget {
-
-  const HomePage2({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BaseAuthPage(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-              'assets/logo_app.png',
-              height: 100,
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Educação Inclusiva',
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Seja bem-vindo! Se for seu primeiro acesso, por favor, vá para as configurações para personalizar sua experiência.',
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
+    final appSettings = Provider.of<AppSettings>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Matemática Inclusiva',
+          style: TextStyle(fontSize: appSettings.fontSize),
+        ),
+        actions: [
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              Navigator.pushNamed(context, '/config');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ConfigScreen()),
+              );
             },
-          ),
-          ElevatedButton(
-            onPressed: () {
-               Navigator.pushNamed(context, '/login');
-            },
-            child: const Text('Avançar'),
           ),
         ],
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Bem-vindo(a)!',
+                style: TextStyle(
+                  fontSize: appSettings.fontSize,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Toque no botão abaixo para começar.',
+                style: TextStyle(
+                  fontSize: appSettings.fontSize,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
+                },
+                child: const Text('Continuar'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

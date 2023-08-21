@@ -1,12 +1,15 @@
-import 'package:adapted_math/src/screens/auth/home/home_page.dart';
 import 'package:adapted_math/src/screens/auth/splash/splash_page.dart';
-import 'package:adapted_math/src/screens/config/config_page.dart';
-import 'package:adapted_math/src/shared/routes/app_routes.dart';
-import 'package:adapted_math/src/shared/themes/app_themes.dart';
+import 'package:provider/provider.dart';
+import 'package:adapted_math/src/shared/utils/app_confing.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppSettings(),
+      child: const MyApp(),
+      ),
+    );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,13 +20,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Educação Inclusiva',
       debugShowCheckedModeBanner: false,
-      theme: AppThemes.defaultTheme,
-      initialRoute: AppRoutes.initialRoute,
-      routes: {
-        AppRoutes.initialRoute: (context) => const SplashScreen(),
-        AppRoutes.homeRoute: (context) => const HomePage2(),
-        AppRoutes.configRoute: (context) => const ConfigPage(),
-      },
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: Provider.of<AppSettings>(context).theme == AppTheme.DARK
+          ? ThemeMode.dark
+          : ThemeMode.light,
+      home: const SplashScreen(),
     );
   }
 }
