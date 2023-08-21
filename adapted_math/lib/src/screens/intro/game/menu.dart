@@ -1,3 +1,5 @@
+import 'package:adapted_math/src/screens/intro/game/levels/bonus/bonus_one_level.dart';
+import 'package:adapted_math/src/screens/intro/game/levels/level_comum.dart';
 import 'package:adapted_math/src/screens/intro/profile/profile_page.dart';
 import 'package:adapted_math/src/screens/intro/score/score_page.dart';
 import 'package:adapted_math/src/screens/levels/test.dart';
@@ -13,9 +15,45 @@ class MenuScreen extends StatelessWidget {
     final appSettings = Provider.of<AppSettings>(context);
 
     final levels = [
-      Level(number: 1, isUnlocked: true, levelClear: true),
-      Level(number: 2, isUnlocked: true, levelClear: false),
-      Level(number: 3, isUnlocked: false, levelClear: false),
+      Level(
+        number: 1,
+        isUnlocked: true,
+        levelClear: true,
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NumberLearningScreen(),
+            ),
+          );
+        },
+      ),
+      Level(
+        number: 2,
+        isUnlocked: true,
+        levelClear: false,
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const QuizScreen(),
+            ),
+          );
+        },
+      ),
+      Level(
+        number: 3,
+        isUnlocked: false,
+        levelClear: false,
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NumberLearningScreen(),
+            ),
+          );
+        },
+      )
     ];
 
     return Scaffold(
@@ -51,12 +89,7 @@ class MenuScreen extends StatelessWidget {
                     ),
               onTap: level.isUnlocked
                   ? () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QuizScreen(),
-                        ),
-                      );
+                      level.onPressed();
                     }
                   : () {},
             ),
@@ -98,20 +131,8 @@ class MenuScreen extends StatelessWidget {
                   }),
               label: 'Perfil'),
         ],
-        onTap: (index) {
-        },
+        onTap: (index) {},
       ),
     );
   }
-}
-
-class Level {
-  final int number;
-  final bool isUnlocked;
-  bool levelClear;
-
-  Level(
-      {required this.number,
-      required this.isUnlocked,
-      required this.levelClear});
 }

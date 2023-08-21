@@ -2,6 +2,8 @@ import 'package:adapted_math/src/screens/intro/game/menu.dart';
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatefulWidget {
+  const QuizScreen({super.key});
+
   @override
   State<QuizScreen> createState() => _QuizScreenState();
 }
