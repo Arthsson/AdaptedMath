@@ -32,7 +32,7 @@ O Matemática Acessível é um aplicativo inclusivo de quiz interativo para test
 
 2. Clone este repositório para sua máquina usando o comando:
 
-  git clone https://github.com/seu-usuario/quiz-app.git
+  git clone https://github.com/arthsson/AdaptedMath.git
 
 3. Navegue até o diretório do projeto:
 
