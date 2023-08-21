@@ -27,21 +27,21 @@ O Matemática Acessível é um aplicativo inclusivo de quiz interativo para test
 ![Tela Jogo 3](screenshots/screenshot2.png)
 
 ## Como Executar o Projeto
-/div
+
 1. Certifique-se de ter o Flutter instalado em sua máquina. Caso contrário, siga as instruções em [flutter.dev](https://flutter.dev/docs/get-started/install) para a instalação.
-/div
+
 2. Clone este repositório para sua máquina usando o comando:
-/div
+
   ```git clone https://github.com/arthsson/AdaptedMath.git```
 
 3. Navegue até o diretório do projeto:
-/div
+
   ```cd adaptedmath```
 
 5. Execute o aplicativo usando o Flutter:
-/div
+
   ```flutter run```
-/div 
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você encontrar algum problema ou quiser melhorar o aplicativo de alguma forma, sinta-se à vontade para abrir uma issue ou enviar um pull request.
